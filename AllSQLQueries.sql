@@ -95,7 +95,7 @@ on Employee.SSN= Dependent.ESSN
 Insert into Employee
 values( 'Hadeer', 'Mohamed', 102672,8/7/1999, 'cairo', 'F', 3000, 112233, 30)
 
---14.Insert another employee with personal data your friend as new employee in department number 30, SSN = 102660, but donít enter any value for salary or supervisor number to him.
+--14.Insert another employee with personal data your friend as new employee in department number 30, SSN = 102660, but don‚Äôt enter any value for salary or supervisor number to him.
 Insert into Employee( Fname, Lname, SSN, Bdate, Address, Sex, Dno)
 values( 'Maya', 'Elawady', 102660, 5/6/1999, 'Doki', 'F', 10)
 
@@ -203,7 +203,7 @@ update Employee set Superssn= 102672 where Superssn=223344
 update Departments set MGRSSN=102672 where MGRSSN=223344
 delete Employee where SSN=223344
 
---14.Try to update all salaries of employees who work in Project ëAl Rabwahí by 30%.
+--14.Try to update all salaries of employees who work in Project ‚ÄòAl Rabwah‚Äô by 30%.
 update Employee set Salary= (Salary*0.3) + Salary
 where SSN in (
 select Essn
@@ -267,7 +267,7 @@ select top(2) Salary
 from Instructor
 order by Salary DESC
 
---11.Select instructor name and his salary but if there is no salary display instructor bonus keyword. ìuse coalesce Functionî.
+--11.Select instructor name and his salary but if there is no salary display instructor bonus keyword. ‚Äúuse coalesce Function‚Äù.
 select Ins_Name, coalesce(convert(varchar(20),Salary), 'Bonus') as Salary
 from Instructor
 
@@ -280,20 +280,20 @@ select s.St_Fname, sv.*
 from Student s, Student sv
 where sv.St_Id=s.St_super
 
---14.Write a query to select the highest two salaries in Each Department for instructors who have salaries. ìusing one of Ranking Functionsî.
+--14.Write a query to select the highest two salaries in Each Department for instructors who have salaries. ‚Äúusing one of Ranking Functions‚Äù.
 select Salary 
 from (select Salary, ROW_NUMBER() over(partition by Dept_id order by Salary desc) as r
 from Instructor) as t
 where r<=2
 
---15.Write a query to select a random  student from each department.  ìusing one of Ranking Functionsî.
+--15.Write a query to select a random  student from each department.  ‚Äúusing one of Ranking Functions‚Äù.
 select st_fname
 from (select st_fname, ROW_NUMBER() over(partition by Dept_id order by newid()) as r
 from Student) as t
 where r=1
 
 --Part(2): Use AdventureWorks DB.
---1.Display the SalesOrderID, ShipDate of the SalesOrderHeader table (Sales schema) to show SalesOrders that occurred within the period ë7/28/2002í and ë7/29/2014í.
+--1.Display the SalesOrderID, ShipDate of the SalesOrderHeader table (Sales schema) to show SalesOrders that occurred within the period ‚Äò7/28/2002‚Äô and ‚Äò7/29/2014‚Äô.
 select SalesOrderID, ShipDate
 from Sales.SalesOrderHeader
 where OrderDate between '7/28/2002' and '7/29/2014' 
@@ -365,7 +365,7 @@ into store_Archive2
 from Sales.Store
 where 1=2
 
---12.Using union statement, retrieve the todayís date in different styles using convert or format funtion.
+--12.Using union statement, retrieve the today‚Äôs date in different styles using convert or format funtion.
 select convert(varchar(20),getdate())
 union
 select convert(varchar(50),getdate(),101)
@@ -488,7 +488,7 @@ from Company.department d inner join HumanResource.employee e
 on d.DeptNo=e.DeptNo
 where EmpFname='James'
 
---7.Change the enter date for the projects for those employees who work in project p1 and belong to department ëSalesí. The new date is 12.12.2007.
+--7.Change the enter date for the projects for those employees who work in project p1 and belong to department ‚ÄòSales‚Äô. The new date is 12.12.2007.
 update Works_on
 set enter_date='12/12/2007'
 from Company.department d,HumanResource.employee e,Works_on w
@@ -712,7 +712,7 @@ where D.Dept_Manager=i.Ins_Id and i.Ins_Id=ic.Ins_Id and ic.Crs_Id=c.Crs_Id and 
 
 select * from displying_manger_info
 
---3.Create a view that will display Instructor Name, Department Name for the ëSDí or ëJavaí Department 
+--3.Create a view that will display Instructor Name, Department Name for the ‚ÄòSD‚Äô or ‚ÄòJava‚Äô Department 
 Alter VIEW displaying_Instructor_info(InstructorName,DepartmentName)
 WITH ENCRYPTION
 AS
@@ -722,9 +722,9 @@ where i.Dept_Id=d.Dept_Id and d.Dept_Name in ('SD','Java')
 
 select * from displaying_Instructor_info
 
---4.Create a view ìV1î that displays student data for student who lives in Alex or Cairo. 
+--4.Create a view ‚ÄúV1‚Äù that displays student data for student who lives in Alex or Cairo. 
 --Note: Prevent the users to run the following query 
---Update V1 set st_address=ítantaí Where st_address=íalexí;
+--Update V1 set st_address=‚Äôtanta‚Äô Where st_address=‚Äôalex‚Äô;
 create view v1 
 as
 select * from Student where St_Address in ('alex','cairo')
@@ -736,7 +736,7 @@ update v1
 set St_Address='tanta'
 where St_Address='alex'
 
---5.Create a view that will display the project name and the number of employees work on it. ìUse SD databaseî
+--5.Create a view that will display the project name and the number of employees work on it. ‚ÄúUse SD database‚Äù
 use SD
 create view displying_project_info(ProjectName,NoOfEmps)
 as
@@ -831,7 +831,7 @@ close std_names_c
 deallocate std_names_c
 
 --Part2
--- 1.Create view named  ìv_clerkî that will display employee#,project#, the date of hiring of all the jobs of the type 'Clerk'.
+-- 1.Create view named  ‚Äúv_clerk‚Äù that will display employee#,project#, the date of hiring of all the jobs of the type 'Clerk'.
 use SD
 create view v_clerk
 as
@@ -841,7 +841,7 @@ where Job='clerk'
 
 select * from v_clerk
 
---2.Create view named  ìv_without_budgetî that will display all the projects data without budget
+--2.Create view named  ‚Äúv_without_budget‚Äù that will display all the projects data without budget
 create view v_without_budget
 as
 select *
@@ -850,7 +850,7 @@ where Budget is null
 
 select * from v_without_budget
 
---3.Create view named ìv_countì that will display the project name and the # of jobs in it.
+--3.Create view named ‚Äúv_count‚Äú that will display the project name and the # of jobs in it.
 create view v_count
 as
 select cp.ProjectName, COUNT(w.Job) as JobsNo
@@ -860,8 +860,8 @@ group by cp.ProjectName
 
 select * from v_count
 
---4.Create view named î v_project_p2î that will display the emp#  for the project# ëp2í.
---use the previously created view  ìv_clerkî.
+--4.Create view named ‚Äù v_project_p2‚Äù that will display the emp#  for the project# ‚Äòp2‚Äô.
+--use the previously created view  ‚Äúv_clerk‚Äù.
 create view v_project_p2
 as
 select EmpNo from v_clerk
@@ -869,7 +869,7 @@ where ProjectNo='p2'
 
 select * from v_project_p2
 
---5.Modifey the view named  ìv_without_budgetî  to display all DATA in project p1 and p2.
+--5.Modifey the view named  ‚Äúv_without_budget‚Äù  to display all DATA in project p1 and p2.
 alter view v_without_budget
 as
 select * from Company.Project
@@ -877,11 +877,11 @@ where ProjectNo='p1' or ProjectNo='p2'
 
 select * from v_without_budget
 
---6.Delete the views  ìv_ clerkî and ìv_countî.
+--6.Delete the views  ‚Äúv_ clerk‚Äù and ‚Äúv_count‚Äù.
 drop view v_clerk
 drop view v_count
 
---7.Create view that will display the emp# and emp lastname who works on dept# is ëd2í.
+--7.Create view that will display the emp# and emp lastname who works on dept# is ‚Äòd2‚Äô.
 alter view displying_emp_info(employeeName,EmployeeNo)
 WITH ENCRYPTION
 as
@@ -891,23 +891,23 @@ where he.DeptNo='d2'
 
 select * from displying_emp_info
 
---8 Display the employee lastname that contains letter ìJî
+--8 Display the employee lastname that contains letter ‚ÄúJ‚Äù
 --Use the previous view created in Q#7
 select employeeName
 from displying_emp_info
 where employeeName like '%j%'
 
---9.Create view named ìv_deptî that will display the department# and department name.
+--9.Create view named ‚Äúv_dept‚Äù that will display the department# and department name.
 create view v_dept
 as
 select cd.DeptNo, cd.DeptName
 from Company.department cd
 
---10.using the previous view try enter new department data where dept# is íd4í and dept name is ëDevelopmentí
+--10.using the previous view try enter new department data where dept# is ‚Äôd4‚Äô and dept name is ‚ÄòDevelopment‚Äô
 insert into v_dept(DeptNo,DeptName)
 values('d4','development')
 
---11.Create view name ìv_2006_checkî that will display employee#, the project# where he works and the date of joining the project which must be from the first of January and the last of December 2006.
+--11.Create view name ‚Äúv_2006_check‚Äù that will display employee#, the project# where he works and the date of joining the project which must be from the first of January and the last of December 2006.
 create view v_2006_check
 as
 select w.EmpNo, w.ProjectNo, w.Enter_Date
@@ -930,8 +930,8 @@ group by d.Dept_Name
 getstdcount
 
 --2.Create a stored procedure that will check for the # of employees in the project p1 
---if they are more than 3 print message to the user ì'The number of employees in the project p1 is 3 or more'î 
---if they are less display a message to the user ì'The following employees work for the project p1'î 
+--if they are more than 3 print message to the user ‚Äú'The number of employees in the project p1 is 3 or more'‚Äù 
+--if they are less display a message to the user ‚Äú'The following employees work for the project p1'‚Äù 
 --in addition to the first name and last name of each one. [Company DB]
 create Procedure check_no_of_emp
 as
@@ -1000,7 +1000,7 @@ update Project set budget=7000 where Pnumber=600
 select * from update_info
 
 --5.Create a trigger to prevent anyone from inserting a new record in the Department table [ITI DB]
---ìPrint a message for user to tell him that he canít insert a new record in that tableî
+--‚ÄúPrint a message for user to tell him that he can‚Äôt insert a new record in that table‚Äù
 create trigger preventInsert
 on department
 instead of insert
@@ -1028,7 +1028,7 @@ as
 insert into Employee
 values('Hadeeer','Mooo',111262,'7-8-1999','egypt','f',50000,102660,10)
 
---7.Create a trigger on student table after insert to add Row in Student Audit table (Server User Name , Date, Note) where note will be ì[username] Insert New Row with Key=[Key Value] in table [table name]î
+--7.Create a trigger on student table after insert to add Row in Student Audit table (Server User Name , Date, Note) where note will be ‚Äú[username] Insert New Row with Key=[Key Value] in table [table name]‚Äù
 --ServerUser Name	Date  Note 
 create table student_audit
  (
@@ -1051,7 +1051,7 @@ values
 (100,'hadeer','mohamed','cairo',23,10,1)
 select * from student_audit
 
---8.Create a trigger on student table instead of delete to add Row in Student Audit table (Server User Name, Date, Note) where note will beì try to delete Row with Key=[Key Value]î
+--8.Create a trigger on student table instead of delete to add Row in Student Audit table (Server User Name, Date, Note) where note will be‚Äú try to delete Row with Key=[Key Value]‚Äù
 alter trigger st_audit2
 on student
 instead of delete  
@@ -1066,10 +1066,3 @@ delete from Student where St_Id=2
 select * from student_audit
 
 -------------------------------------------------------------------------------------
-
-
-
-
-
-
-
